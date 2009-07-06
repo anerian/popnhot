@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @title %> Pop'N Hot!</title>
+  <%= stylesheet_link_tag 'styles' %>
+</head>
+<body>
+  <div id="header">
+    <% if @title.nil? %>
+      <h1 id="logo"><a title="All the celebrity gossip in one place" href="/">Pop'N Hot!</a></h1>
+    <% else %>
+      <h2 id="logo"><a title="All the celebrity gossip in one place" href="/">Pop'N Hot!</a></h2>
+    <% end %>
+  </div>
+  <div id="content">
+    <%= yield %>
+  </div>
+</body>
+</html>

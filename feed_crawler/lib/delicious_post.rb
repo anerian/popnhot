@@ -40,17 +40,21 @@ class DeliciousPost
     end
   end
  
-  def absolute_url(name, rparams={})
-    uri = Merb::Router.generate(name, rparams,
-      { :controller => 'posts',
-        :action => 'show',
-        :format => 'html'
-      }
-    )
-    uri = Merb::Config[:path_prefix] + uri if Merb::Config[:path_prefix]
-    "http://www.popnhot.com#{uri}"
+  include ActionController::UrlWriter
+
+  def absolute_url(type, obj)
+
+#    uri = Merb::Router.generate(name, rparams,
+#      { :controller => 'posts',
+#        :action => 'show',
+#        :format => 'html'
+#      }
+#    )
+#    uri = Merb::Config[:path_prefix] + uri if Merb::Config[:path_prefix]
+    path = send("#{type}_path", obj)
+    "http://www.popnhot.com#{path}"
   end
-    
+ 
   def log(msg)
     Crawl::Session.info(msg)
   end

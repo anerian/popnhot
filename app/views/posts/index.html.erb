@@ -1,2 +1,7 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<ul class="posts">
+  <% for post in @posts do %>
+  <li>
+    <%= render :partial => 'summary', :locals => {:post => post} %>
+  </li>
+  <% end %>
+</ul>
