@@ -42,7 +42,7 @@ describe 'Extracting Pink is the new blog Content' do
 
   it 'should strip html from description text' do
     @posts.each do|p|
-      [:description].should_not =~ /<img|<object/
+      p[:description].should_not =~ /<img|<object/
     end
   end
 end

@@ -89,7 +89,7 @@ describe 'Running a session' do
       pv.should == v
     end
 
-    puts "check images #{images.inspect}"
+    #puts "check images #{images.inspect}"
 
     count = 0
     images.each_with_index do|pic,i|

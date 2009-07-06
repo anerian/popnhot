@@ -21,6 +21,7 @@ module Crawl
           video = true
         end
       end
+      (body/"object").remove
 
       return {:body => normalize(body.inner_html), :thumb_path => thumb_path, :video => true }
     end
