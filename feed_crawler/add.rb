@@ -3,13 +3,13 @@ LOG_DIR=File.expand_path(File.join(CUR_DIR,'log'))
 DIR_ROOT=File.expand_path(File.join(CUR_DIR,'..'))
 
 $:.unshift File.join(CUR_DIR,'lib')
-require 'merb_startup'
 
 DIR_ROOT=File.join(CUR_DIR,'..') unless defined?(DIR_ROOT)
 LOG_DIR=File.join(CUR_DIR,'log') unless defined?(LOG_DIR)
   
 # startup the merb environment
-Merb.load_externally(DIR_ROOT)
+#Merb.load_externally(DIR_ROOT)
+require '../config/environment.rb'
     
 require 'crawl'
 

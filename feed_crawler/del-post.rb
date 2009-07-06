@@ -3,7 +3,7 @@ LOG_DIR=File.expand_path(File.join(CUR_DIR,'log'))
 DIR_ROOT=File.expand_path(File.join(CUR_DIR,'..'))
 
 $:.unshift File.join(CUR_DIR,'lib')
-require 'merb_startup'
+require '../config/environment.rb'
 
 DIR_ROOT=File.join(CUR_DIR,'..') unless defined?(DIR_ROOT)
 LOG_DIR=File.join(CUR_DIR,'log') unless defined?(LOG_DIR)
