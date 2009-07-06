@@ -1,5 +1,6 @@
 require 'logger'
 require 'curb'
+gem 'rmagick'
 require 'RMagick'
 
 module Crawl
