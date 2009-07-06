@@ -1,0 +1,25 @@
+require 'rake'
+begin
+  require 'spec/rake/spectask'
+rescue LoadError
+  puts <<-EOS
+To use rspec for testing you must install rspec gem:
+    gem install rspec
+EOS
+  exit(0)
+end
+require 'rake/testtask'
+
+desc "Run the specs under specs/"
+Spec::Rake::SpecTask.new do |t|
+  t.spec_opts = ['--options', "specs/spec.opts"]
+  t.spec_files = FileList['specs/**/*_spec.rb']
+end
+
+desc "Run tests, this hit live services unlike the specs"
+Rake::TestTask.new do |t|
+  t.test_files = FileList["test/*_test.rb"]
+  t.verbose = true
+end
+
+task :default => :spec
