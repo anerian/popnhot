@@ -50,8 +50,9 @@ describe 'Running a session' do
              :summary=>"<p>Filed under: <a href=\"http://www.tmz.com/category/celebrity-justice/\" rel=\"tag\">Celebrity Justice</a></p><a href=\"http://www.tmz.com\">TMZ.com</a>:  Naomi Campbell just fessed up to going all, well, Naomi Campbell on a pair of police officers.The supermodel pleaded guilty to four charges in a west London court today, including two of assaulting the po-po and one \"public order offense.\" Her rep... <a href=\"http://www.tmz.com/2008/06/20/naomi-cops-to-clobbering-coppers/\">Read more</a><br/><br/>",
              :thumb_path=>nil}
 
+    post = posts.find{|p| p[:link] == first[:link]}
     first.each do|k,v|
-      pv = posts.first[k]
+      pv = post[k]
       pv.should == v
     end
 
@@ -64,9 +65,10 @@ describe 'Running a session' do
               :image=>'/images/video.png',
               :tag_list=>["katie couric", "KatieCouric"],
               :thumb_path=>nil}
+    post = posts.find{|p| p[:link] == second[:link]}
 
     second.each do|k,v|
-      pv = posts[2][k]
+      pv = post[k]
       pv.should == v
     end
 
@@ -80,14 +82,20 @@ describe 'Running a session' do
             :tag_list=>["Casey Aldridge", "CaseyAldridge", "Jamie Lynn Spears", "JamieLynnSpears"],
             :thumb_path=>File.expand_path(File.join(File.dirname(__FILE__),"../../staging/www.blogsmithmedia.com/www.tmz.com/media/2008/06/thumbs/0619_jamie_casey_more_details.jpg"))}
 
+    post = posts.find{|p| p[:link] == last[:link]}
+
     last.each do|k,v|
-      pv = posts.last[k]
+      pv = post[k]
       pv.should == v
     end
 
-    images.each do|pic|
-      File.exist?("#{stage_root}/#{pic}").should == true
+    puts "check images #{images.inspect}"
+
+    count = 0
+    images.each_with_index do|pic,i|
+      count += 1 if File.exist?("#{stage_root}/#{pic}")
     end
+    count.should == images.size
   end
 
 end
