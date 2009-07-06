@@ -13,6 +13,7 @@ class FeedCrawler
     require 'rbtagger'
     require 'delicious_post'
     require 'timeout'
+    require 'normalize_tags'
 
     if defined?(TagList)
       TagList.class_eval do

@@ -27,7 +27,7 @@ module Crawl
       end
       # remove br tags
       (body/"br").remove
-      (body/"p").each { |p| p.swap('') if p.inner_html.strip.empty? }
+      #(body/"p").each { |p| p.swap('') if p.inner_html.strip.empty? }
       (body/"style").remove
       (body/"script").remove
 

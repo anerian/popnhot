@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/helper.rb'
 
-describe 'Extracting PopSugar Content' do
-  before(:each) do
+describe 'Extracting PopSugar Content base' do
+  before(:all) do
     @session = {}
     @crawl = Crawl::PopSugar.new(DIR_ROOT,@session,{},'',NewsFeed::RSS)
   end

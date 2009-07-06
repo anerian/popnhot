@@ -120,10 +120,12 @@ module Crawl
         end
 
         cfg.item do|item|
+          log "item: #{item[:title]}"
           # fetch the original article
           uri = URI.parse(item[:link])
           #puts "got an #{item.inspect}"
-          if !@dup_check.call(item[:title], item[:link])
+          return if @dup_check.call(item[:title], item[:link])
+          #if !@dup_check.call(item[:title], item[:link])
 
             @session.request(item[:link]) do|success,body|
               log "post request response(#{item[:link]})"
@@ -158,7 +160,7 @@ module Crawl
               end
             end
 
-          end
+          #end
         end
 
       end
@@ -246,17 +248,23 @@ module Crawl
       maxheight = 100
       aspectratio = maxwidth.to_f / maxheight.to_f
       imgfile = orig_path
+      if File.exist?(imgfile) and File.size(imgfile) > 0
+        log "create thumb for: #{imgfile} as #{thumb_path}"
 
-      pic = Magick::Image.read(imgfile).first
-      imgwidth = pic.columns
-      imgheight = pic.rows
-      imgratio = imgwidth.to_f / imgheight.to_f
-      imgratio > aspectratio ? scaleratio = maxwidth.to_f / imgwidth : scaleratio = maxheight.to_f / imgheight
-      thumb = pic.resize(scaleratio)
+        pic = Magick::Image.read(imgfile).first
+        imgwidth = pic.columns
+        imgheight = pic.rows
+        imgratio = imgwidth.to_f / imgheight.to_f
+        imgratio > aspectratio ? scaleratio = maxwidth.to_f / imgwidth : scaleratio = maxheight.to_f / imgheight
+        thumb = pic.resize(scaleratio)
 
-      white_bg = Magick::Image.new(maxwidth, thumb.rows)
-      pic = white_bg.composite(thumb, Magick::CenterGravity, Magick::OverCompositeOp)
-      pic.write(thumb_path)
+        white_bg = Magick::Image.new(maxwidth, thumb.rows)
+        pic = white_bg.composite(thumb, Magick::CenterGravity, Magick::OverCompositeOp)
+        pic.write(thumb_path)
+
+      else
+        log "skipping file either doesn't exist or is zero bytes"
+      end
     rescue => e
       error "#{e.message}\n#{e.backtrace.join("\n")}"
     end
