@@ -245,7 +245,7 @@ module Crawl
 
     def resize_image(orig_path,thumb_pathname)
       if File.exist?(orig_path) and File.size(orig_path) > 0
-        log "create thumb for: #{orig_path} as #{thumb_path}"
+        log "create thumb for: #{orig_path} as #{thumb_pathname}"
 
         pic = Magick::Image.read(orig_path).first
         pic.resize_to_fill!(125, 125, Magick::NorthGravity)
