@@ -8,3 +8,7 @@
 <strong><%= link_to post.title, post.permalink %></strong><br/>
 <%= post.summary %>
 </p>
+<%= h post.feed.title %>
+<% for t in post.tags do %>
+<%= link_to t.name, tag_path(t) %>&nbsp;
+<% end %>

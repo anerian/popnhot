@@ -25,13 +25,20 @@ module Normalize
 
     end
 
-    def self.selective(tags)
+    def self.selective(tags, doc=nil)
       taglist = (Names::Last.all + Names::First.all).map{|n| n.to_s.downcase}
       tagger = Word::Tagger.new taglist, :words => 4
       result_tags = []
       for tag in tags do
         rt = tagger.execute( tag )
         result_tags << rt.join(' ') if rt.any?
+      end
+      if doc
+        rt = tagger.execute(doc)
+        if rt.any?
+          result_tags += rt 
+          result_tags.uniq!
+        end
       end
       result_tags
     end

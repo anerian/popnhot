@@ -135,7 +135,7 @@ class FeedCrawler
               end
             end
             tag_list = (post[:tag_list]||[]).map{|n| Normalize::Tags.normalize(n).downcase }.uniq
-            post[:tag_list] = Normalize::Tags.selective(tag_list)
+            post[:tag_list] = Normalize::Tags.selective(tag_list,post[:body]).join(',')
             rp = Post.new(post)
             if rp.save
               log "created new post: #{post[:title].inspect}"
