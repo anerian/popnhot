@@ -12,6 +12,12 @@
   width:299px;
   height: 81px;
 }
+#logo a {
+  width:299px;
+  height: 81px;
+  display:block;
+  cursor:pointer;
+}
 .posts { 
   width:800px;
   margin:0;

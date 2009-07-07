@@ -34,7 +34,14 @@ module Crawl
     def filter(key, value,item)
       case key
         when :link
-          value.gsub(/http:\/\/.*\//,'http://www.usmagazine.com/')
+          begin
+            uri = URI.parse(value)
+            url = "http://www.usmagazine.com/#{uri.path}"
+            url += "?#{uri.query}" if uri.query
+            url
+          rescue => e
+            value.gsub(/http:\/\/.*\//,'http://www.usmagazine.com/')
+          end
         when :description
           value.gsub(/&lt;/,'<').gsub(/&gt;/,'>').gsub(/&amp;/,'&')
         else

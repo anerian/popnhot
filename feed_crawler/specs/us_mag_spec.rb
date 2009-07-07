@@ -23,7 +23,7 @@ describe 'Extracting Us Magazine Content' do
 
   it 'should convert ip hostnames to usmagazine.com hostnames' do
     for post in @posts do
-      post[:link].should =~ /usmagazine.com/
+      post[:link].should =~ /usmagazine.com\/news/
     end
   end
 
