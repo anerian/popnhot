@@ -1,6 +1,10 @@
 require 'set'
 module Names
   class First
+    def self.all
+      define_set unless defined?(@_first_set)
+      @_first_set.to_a
+    end
     def self.include?(name)
       define_set unless defined?(@_first_set)
       if name.is_a?(String)

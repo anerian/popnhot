@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 26) do
+ActiveRecord::Schema.define(:version => 20090707154811) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -62,18 +62,19 @@ ActiveRecord::Schema.define(:version => 26) do
   add_index "indexer_status", ["hostname", "index_name"], :name => "index_indexer_status_on_hostname_and_index_name", :unique => true
 
   create_table "posts", :force => true do |t|
-    t.string   "title",                                           :null => false
+    t.string   "title",                                              :null => false
     t.string   "image",           :limit => 1024
-    t.text     "body",                                            :null => false
+    t.text     "body",                                               :null => false
     t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "feed_id",                         :default => 0,  :null => false
+    t.integer  "feed_id",                         :default => 0,     :null => false
     t.datetime "published_at"
-    t.string   "link",            :limit => 1024, :default => "", :null => false
-    t.string   "permalink",                       :default => "", :null => false
-    t.text     "summary",         :limit => 1024, :default => "", :null => false
+    t.string   "link",            :limit => 1024, :default => "",    :null => false
+    t.string   "permalink",                       :default => "",    :null => false
+    t.text     "summary",         :limit => 1024, :default => "",    :null => false
     t.string   "cached_tag_list", :limit => 512
+    t.boolean  "ready",                           :default => false, :null => false
   end
 
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"

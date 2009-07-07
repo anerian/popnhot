@@ -1,6 +1,10 @@
 require 'set'
 module Names
   class Last
+    def self.all
+      define_set unless defined?(@_last_set)
+      @_last_set.to_a
+    end
     def self.include?(name)
       define_set unless defined?(@_last_set)
       if name.is_a?(String)

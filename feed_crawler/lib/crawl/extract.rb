@@ -193,7 +193,7 @@ module Crawl
     end
 
   private
-    
+ 
     def normalize(str)
       # herustic, run the regex 3 times over the string, to get nested empty tags
       str.gsub(/<([^>]*)\s*?.*>[\n\t\s\r]*<\/\s*\1\s*>/,'').
@@ -243,24 +243,13 @@ module Crawl
       npath
     end
 
-    def resize_image(orig_path,thumb_path)
-      maxwidth = 125
-      maxheight = 100
-      aspectratio = maxwidth.to_f / maxheight.to_f
-      imgfile = orig_path
-      if File.exist?(imgfile) and File.size(imgfile) > 0
-        log "create thumb for: #{imgfile} as #{thumb_path}"
+    def resize_image(orig_path,thumb_pathname)
+      if File.exist?(orig_path) and File.size(orig_path) > 0
+        log "create thumb for: #{orig_path} as #{thumb_path}"
 
-        pic = Magick::Image.read(imgfile).first
-        imgwidth = pic.columns
-        imgheight = pic.rows
-        imgratio = imgwidth.to_f / imgheight.to_f
-        imgratio > aspectratio ? scaleratio = maxwidth.to_f / imgwidth : scaleratio = maxheight.to_f / imgheight
-        thumb = pic.resize(scaleratio)
-
-        white_bg = Magick::Image.new(maxwidth, thumb.rows)
-        pic = white_bg.composite(thumb, Magick::CenterGravity, Magick::OverCompositeOp)
-        pic.write(thumb_path)
+        pic = Magick::Image.read(orig_path).first
+        pic.resize_to_fill!(125, 125, Magick::NorthGravity)
+        pic.write(thumb_pathname)
 
       else
         log "skipping file either doesn't exist or is zero bytes"

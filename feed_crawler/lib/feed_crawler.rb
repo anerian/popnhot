@@ -134,7 +134,8 @@ class FeedCrawler
                 log "post: #{post[:title].inspect}, has no recommended tags..."
               end
             end
-            post[:tag_list] = (post[:tag_list]||[]).map{|n| Normalize::Tags.normalize(n).downcase }.uniq
+            tag_list = (post[:tag_list]||[]).map{|n| Normalize::Tags.normalize(n).downcase }.uniq
+            post[:tag_list] = Normalize::Tags.selective(tag_list)
             rp = Post.new(post)
             if rp.save
               log "created new post: #{post[:title].inspect}"

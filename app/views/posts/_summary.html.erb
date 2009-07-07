@@ -1,6 +1,10 @@
 <p>
 <% post.summarize! %>
-<%= image_tag post.image %>
+<% if post.image.nil? %>
+  <%= image_tag 'default', :width => '125', :height => '125' %>
+<% else %>
+  <%= image_tag post.image, :width => '125', :height => '125' %>
+<% end %>
 <strong><%= link_to post.title, post.permalink %></strong><br/>
 <%= post.summary %>
 </p>

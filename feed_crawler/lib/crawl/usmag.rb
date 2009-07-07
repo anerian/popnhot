@@ -36,7 +36,7 @@ module Crawl
         when :link
           begin
             uri = URI.parse(value)
-            url = "http://www.usmagazine.com/#{uri.path}"
+            url = "http://www.usmagazine" + ".com/#{uri.path}".squeeze('/')
             url += "?#{uri.query}" if uri.query
             url
           rescue => e
