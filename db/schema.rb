@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090707154811) do
+ActiveRecord::Schema.define(:version => 20090707204810) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -102,6 +102,11 @@ ActiveRecord::Schema.define(:version => 20090707154811) do
   add_index "tags", ["name"], :name => "name_index", :unique => true
   add_index "tags", ["permalink"], :name => "index_tags_on_permalink"
   add_index "tags", ["user_id"], :name => "fk_labels_user_id_to_users_id"
+
+  create_table "topics", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :limit => 128,                        :null => false

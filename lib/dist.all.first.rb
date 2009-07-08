@@ -390,6 +390,7 @@ module Names
 :KARLA,
 :CELIA,
 :LATOYA,
+:LA_TOYA,
 :PATTY,
 :SHELIA,
 :GAYLE,
@@ -5513,7 +5514,12 @@ module Names
 :DARELL,
 :BRODERICK,
 :KHLOE,
-:ALONSO]
+:ALONSO,
+:GUNS_N,
+:SPIKE,
+:SMOKEY,
+:POPPY
+]
     end
   end
 end

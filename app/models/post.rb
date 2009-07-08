@@ -39,28 +39,77 @@ class Post < ActiveRecord::Base
     text.split(' ').collect{|p| ic.iconv(p +' ')[0..-2] }.join(' ')
   end
 
-  def display_body(limit = 64)
+  def display_body(limit = nil)
+    if not limit.nil?
+      return plain_text.split(/\s/)[0..limit].join(' ').gsub(/&nbsp;/,' ').gsub(/&amp;/,' and ').gsub(/(\. )+/,' ') #.gsub(/<\/?[^>]*>/, '. ')
+    end
+    # allowed tags: strong, p, a
+    allowed = ['body', 'em', 'strong', 'b', 'p', 'a', 'br']
+
+    # start with one opening p tag
+    doc = Hpricot("<html><body><p>#{self.body}</body></html>")
+    doc.search("//comment()").remove
+    remove = []
+    ptag = ''
+    add_paras = []
+    doc.at('body').search('*') do|tag|
+      if tag.class != Hpricot::Text
+        if allowed.include?(tag.name)
+          # remove unwanted class/style attributes
+          tag['class'] = '' unless tag['class'].blank?
+          tag['style'] = '' unless tag['style'].blank?
+
+          if tag.name == 'br' and ptag.name == 'br'
+            tag['class'] = '_xxx_terminate'
+            ptag['class'] = '_xxx_terminate'
+            add_paras << tag
+          end
+          ptag = tag
+        else
+          remove << tag.name
+        end
+      end
+    end
+    add_paras.each do|tag|
+      tag.swap("<p>")
+    end
+    remove << "._xxx_terminate"
+    remove.each do|t|
+      (doc/t).remove
+    end
+    (doc/:br).remove
+
+    (doc/:a).each do|tag|
+      tag.swap(%(<a href="#{tag['href']}">#{tag.inner_html}</a>))
+    end
+    text = doc.at('body').inner_html
     text = case feed.klass
       when /Tmz/
-        plain_text
+        text
       when /UsMag/
-        plain_text
+        text.gsub(/Join Us on.*$/,'')
       when /Celebuzz/
-        plain_text
+        text
       when /People/
-        plain_text
+        text
       when /PopSugar/
-        plain_text
+        text
     else
       summary
     end
 
-    if limit.nil?
-      result = plain_text.split(/\s/)[0..128].join(' ').gsub(/&nbsp;/,' ').gsub(/&amp;/,' and ').gsub(/(\. )+/,' ') #gsub(/<\/?[^>]*>/, '. ').
-    else
-      result = text.split(/\s/)[0..limit].join(' ').gsub(/&nbsp;/,' ').gsub(/&amp;/,' and ').gsub(/(\. )+/,' ') #.gsub(/<\/?[^>]*>/, '. ')
+    # parse again with fixup tags
+    doc = Hpricot("<html><body>#{text.gsub(/<\/p><\/p>/,'')}</body></html>", :fixup_tags => true)
+
+    # find any empty p tags and remove
+    (doc/:p).each do|p|
+      p['class'] = '_xxx_terminate' if p.inner_text.blank?
     end
-    Hpricot("<html><body>#{result}</body></html>",:fixup_tags => true).at('body').inner_html
+    # go through one more time. removing the tags from the remove list
+    remove.each {|t| logger.debug("remove: #{t}"); (doc/t).remove }
+    markup = doc.at(:body).inner_html
+    logger.debug(markup.gsub(/<p>/,"\n<p>"))
+    markup
   end
 
   def plain_text

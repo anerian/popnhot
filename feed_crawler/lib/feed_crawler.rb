@@ -15,6 +15,9 @@ class FeedCrawler
     require 'timeout'
     require 'normalize_tags'
 
+    @rule_tagger = Brill::Tagger.new
+    @first_tagger, @last_tagger = Normalize::Tags.name_taggers
+
     if defined?(TagList)
       TagList.class_eval do
         def add(*names)
@@ -112,30 +115,10 @@ class FeedCrawler
 
           # check for duplicates
           p = Post.find_by_link(post[:link].strip)
-          if p
-            #log "post duplicate: #{post[:link].inspect}"
-          else
-            if post[:tag_list].blank? or post[:tag_list].size < 4
-              log "post: #{post[:title].inspect}, has no tags, attempting to auto tag"
-              tags = @tagger.execute("#{post[:title]} #{post[:summary]}".gsub(/[^\w]/,' ').downcase)
-              if tags
-                post[:tag_list] = tags
-                if tags.size > 3
-                  post[:tag_list] = tags.select do|t|
-                    tag = Tag.find_by_name(t)
-                    tag.name? if tag
-                  end
-                  if post[:tag_list].size > 3
-                    post[:tag_list] = post[:tag_list][0..3]
-                  end
-                end
-                log "post: #{post[:title].inspect} => #{post[:tag_list].inspect}"
-              else
-                log "post: #{post[:title].inspect}, has no recommended tags..."
-              end
-            end
-            tag_list = (post[:tag_list]||[]).map{|n| Normalize::Tags.normalize(n).downcase }.uniq
-            post[:tag_list] = Normalize::Tags.selective(tag_list,post[:body]).join(',')
+          if p.nil?
+            doc = Hpricot("<html><body>#{post[:body]}</body></html>")
+            post[:tag_list] = Normalize::Tags.extract("#{post[:title]} #{doc.inner_text}", @rule_tagger, @first_tagger, @last_tagger)
+            doc = nil
             rp = Post.new(post)
             if rp.save
               log "created new post: #{post[:title].inspect}"

@@ -24,6 +24,9 @@ module Crawl
       if body.at('object')
         has_video = true
       end
+      if (iframe=body.at('iframe'))
+        has_video = iframe['src'].match(/www.msnbc.msn.com/) and iframe['src'].match(/vp/)
+      end
  
       # finally strip empty tags
       body = normalize(body.inner_html)
