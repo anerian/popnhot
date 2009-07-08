@@ -74,8 +74,21 @@ module Normalize
         end
       end
       tag_list = (tag_list||[]).map{|n| Normalize::Tags.normalize(n).downcase }.uniq
+      nlist = []
+      tag_list.each do|t|
+        words = t.split(' ')
+        nw = []
+        for w in words do
+          if !StopWords.include?(w.to_sym)
+            nw << w
+          end
+        end
+        nlist << nw.join(' ')
+      end
 #      puts "Possible tags: #{tag_list.inspect}"
-      tag_list = Normalize::Tags.selective(tag_list, first_tagger, last_tagger).join(',')
+      tag_list = Normalize::Tags.selective(nlist, first_tagger, last_tagger).join(',')
+
+      # remove all stop word tags
 #      puts "Selective tags: #{tag_list.inspect}"
       tag_list
     end
