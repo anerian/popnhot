@@ -66,7 +66,7 @@ module Normalize
       # in addition to what the rule tagger found, lets do a simple search for first names and see if the last name follows...
       words = text.split(' ')
       words.each_with_index do|w,i|
-        if w[0].chr.to_s.match(/[A-Z]/) and !StopWords.include?(w.to_sym) and Names::First.include?(w) and words.size > i
+        if w[0].chr.to_s.match(/[A-Z]/) and !StopWords.include?(w.to_sym) and Names::First.include?(w) and words.size > (i+1)
       #    puts "word is first '#{w.inspect}' what about #{words[i+1]}"
           if Names::Last.include?(words[i+1])
             tag_list << "#{w} #{words[i+1]}"
