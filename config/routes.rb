@@ -2,11 +2,13 @@ ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
 #  map.resources :posts, :only => [:show, :index]
 #  map.resources :tags, :only => [:show, :index]
+  map.topics '/topics', :controller => 'topics', :action => 'index'
+  map.topics '/topic/:id', :controller => 'topics', :action => 'show'
+  map.tags '/tags', :controller => 'tags', :action => 'index'
+  map.tag '/t/:permalink', :controller => 'tags', :action => 'show'
   map.posts '/', :controller => 'posts', :action => 'index'
   map.post '/:permalink', :controller => 'posts', :action => 'show'
   map.post '/posts/:permalink', :controller => 'posts', :action => 'show'
-  map.tags '/tags', :controller => 'tags', :action => 'index'
-  map.tag '/t/:permalink', :controller => 'tags', :action => 'show'
   map.root :controller => 'posts', :action => 'index'
 
   # Sample of regular route:

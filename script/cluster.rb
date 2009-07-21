@@ -5,10 +5,11 @@ require File.join(File.dirname(__FILE__),'..','config','environment')
 $:.unshift File.join(RAILS_ROOT,'lda-ruby','lib') 
 require 'lda'
 require 'rbtagger'
+require File.join(RAILS_ROOT,'lib','normalize_tags')
 
 class PostDoc < Lda::Document
   def initialize(post, vocab_set, tagger)
-    text = post.title + ' ' + post.body
+    text = post.tag_list.join(' ') #post.title + ' ' + post.body
     term_freq = tagger.freq(text)
     idx = "#{term_freq.size} "
     @post = post
@@ -34,7 +35,7 @@ def build_vocab(posts)
   [vec, set]
 end
 
-# all posts
+# find the last 100 posts
 posts = Post.find(:all, :limit => 100, :order => 'created_at DESC')
 
 # build the vocabulary from the tags
@@ -54,21 +55,25 @@ end
 model = Lda::Lda.new
 model.num_topics = 10
 #model.max_iter = 200
+corpus.instance_variable_set(:@num_terms,vocab_vec.size)
 model.corpus = corpus
 puts "running EM seeded"
 model.em("seeded")
 model.load_vocabulary(vocab_vec)
 #puts model.to_s
-#puts "doc prob: #{model.compute_topic_document_probability.inspect}"
-#puts "doc phi: #{model.phi.inspect}"
+puts "doc prob: #{model.compute_topic_document_probability.inspect}"
+puts "doc phi: #{model.phi.inspect}"
 puts "--------"
-#model.print_topics
+model.print_topics
 topics = model.top_words
 topics.each do|id,words|
   #puts "#{vocab_vec[id]} -> #{words.inspect}"
   focus = vocab_vec[id]
   topic = Topic.find_or_create_by_focus( :focus => focus, :words => words )
-  topic.posts = posts.select{|p|
+  topic.posts = Post.find_tagged_with(words, :limit => 100, :order => 'created_at DESC')
+  puts "Adding #{topic.posts.size}"
+=begin
+  posts.select{|p|
     text = p.plain_text
     if text.match(focus) 
       true
@@ -83,6 +88,7 @@ topics.each do|id,words|
       ret
     end
   }
+=end
   puts "created topic: #{topic.focus} with Posts, #{topic.posts.map{|p| p.title}.inspect}"
 end
 puts "all topics created"
