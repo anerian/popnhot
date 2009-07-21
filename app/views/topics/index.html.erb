@@ -1,0 +1,10 @@
+<ul class="topics">
+  <% for topic in @topics do %>
+  <li>
+    <strong><%= topic.focus %>(<%= topic.posts.count %>)</strong>
+    <% for post in topic.posts do %>
+      <dd><%= render :partial => 'posts/summary', :locals => {:post => post} %></dd>
+    <% end %>
+  </li>
+  <% end %>
+</ul>
