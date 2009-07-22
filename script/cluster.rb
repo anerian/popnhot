@@ -35,6 +35,8 @@ def build_vocab(posts)
   [vec, set]
 end
 
+Topic.destroy_all
+
 # find the last 100 posts
 posts = Post.find(:all, :limit => 100, :order => 'created_at DESC')
 
@@ -67,28 +69,19 @@ puts "--------"
 model.print_topics
 topics = model.top_words
 topics.each do|id,words|
-  #puts "#{vocab_vec[id]} -> #{words.inspect}"
+  puts "#{vocab_vec[id]} -> #{words.inspect}"
   focus = vocab_vec[id]
   topic = Topic.find_or_create_by_focus( :focus => focus, :words => words )
-  topic.posts = Post.find_tagged_with(words, :limit => 100, :order => 'created_at DESC')
+  #canidates = #Post.find_tagged_with(words, :limit => 100, :order => 'created_at DESC')
+  regtags = words.join('|')
+  selected = posts.select{|p|  plain_text = p.plain_text ; plain_text.match(focus) or plain_text.match(regtags) }
+  if selected = posts.empty?
+    topic.destroy
+  else
+    posts -= selected
+    topic.posts = selected
+  end
   puts "Adding #{topic.posts.size}"
-=begin
-  posts.select{|p|
-    text = p.plain_text
-    if text.match(focus) 
-      true
-    else
-      ret = false
-      for w in words do
-        if text.match(w)
-          ret = true
-          break
-        end
-      end
-      ret
-    end
-  }
-=end
   puts "created topic: #{topic.focus} with Posts, #{topic.posts.map{|p| p.title}.inspect}"
 end
 puts "all topics created"
