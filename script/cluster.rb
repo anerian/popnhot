@@ -25,7 +25,7 @@ class PostDoc < Lda::Document
 end
 
 def build_vocab(posts)
-  vec = Tag.all.map{|t| t.name }
+  vec = []  #Tag.all.map{|t| t.name }
   posts.each {|p| vec << p.plain_text.split(' ') }
   vec.flatten!
   vec.uniq!
@@ -75,10 +75,12 @@ topics.each do|id,words|
   #canidates = #Post.find_tagged_with(words, :limit => 100, :order => 'created_at DESC')
   regtags = words.join('|')
   selected = posts.select{|p|  plain_text = p.plain_text ; plain_text.match(focus) or plain_text.match(regtags) }
-  if selected = posts.empty?
+  if selected == posts.empty?
     topic.destroy
   else
-    posts -= selected
+    #posts -= selected
+    posts = posts.reject{|p| selected.find{|i| i.id == p.id} }
+    puts "topics left: #{posts.size}"
     topic.posts = selected
   end
   puts "Adding #{topic.posts.size}"

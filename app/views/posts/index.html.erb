@@ -5,3 +5,19 @@
   </li>
   <% end %>
 </ul>
+<% content_for :sidebar do %>
+<h2>Hot - who's happening now</h2>
+<ul class="hot">
+  <% hots = Tag.find(HotTag.first.tag_id_list) %>
+  <% for t in hots do %>
+    <li><%= link_to t.name.humanize, '/t' + t.permalink %></li>
+  <% end %>
+</ul>
+<h2>Pop - who's always got it going on</h2>
+<ul class="pop">
+  <% hots = Tag.find(PopTag.first.tag_id_list) %>
+  <% for t in hots do %>
+    <li class="<%= tag_class(t) %>"><%= link_to t.name.humanize, '/t' + t.permalink %></li>
+  <% end %>
+</ul>
+<% end %>

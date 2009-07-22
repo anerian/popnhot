@@ -33,3 +33,17 @@
   clear:both;
   list-style:none;
 }
+#content {
+  float:left;
+  width:800px;
+  margin-right:100px;
+}
+#sidebar {
+  float:left;
+  width:200px;
+}
+  
+.tag1 { line-height:1.0em; font-size: 1.0em; }
+.tag2 { line-height:1.2em; font-size: 1.2em; }
+.tag3 { line-height:1.4em; font-size: 1.4em; }
+.tag4 { line-height:1.6em; font-size: 1.6em; }

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090707204810) do
+ActiveRecord::Schema.define(:version => 20090722030635) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -51,6 +51,12 @@ ActiveRecord::Schema.define(:version => 20090707204810) do
     t.string   "content_type", :default => "application/rss+xml", :null => false
   end
 
+  create_table "hot_tags", :force => true do |t|
+    t.string   "tag_id_list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "indexer_status", :force => true do |t|
     t.string   "index_name", :limit => 50
     t.datetime "updated_at"
@@ -60,6 +66,12 @@ ActiveRecord::Schema.define(:version => 20090707204810) do
   end
 
   add_index "indexer_status", ["hostname", "index_name"], :name => "index_indexer_status_on_hostname_and_index_name", :unique => true
+
+  create_table "pop_tags", :force => true do |t|
+    t.string   "tag_id_list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title",                                              :null => false

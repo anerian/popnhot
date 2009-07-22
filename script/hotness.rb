@@ -2,6 +2,8 @@
 # Determine hotness using tags
 require File.join(File.dirname(__FILE__),'..','config','environment')
 $:.unshift File.join(RAILS_ROOT,'lda-ruby','lib') 
+require 'lib/dist.all.first'
+require 'lib/dist.all.last'
 
 # determine the post with the most tags within the first 5
 #posts = @posts.select{|p| p.tag_list.length > 2}.sort_by{|p| p.tag_list.length }.reverse

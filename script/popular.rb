@@ -2,6 +2,8 @@
 # Determine hotness using tags
 require File.join(File.dirname(__FILE__),'..','config','environment')
 $:.unshift File.join(RAILS_ROOT,'lda-ruby','lib') 
+require 'lib/dist.all.first'
+require 'lib/dist.all.last'
 
 # TODO: we need to do some sort of normalization of the distribution of tag counts
 # and make this a normalized number eventually everyone will be popular
