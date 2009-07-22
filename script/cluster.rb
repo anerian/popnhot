@@ -35,7 +35,7 @@ def build_vocab(posts)
   [vec, set]
 end
 
-Topic.destroy_all
+#Topic.destroy_all
 
 # find the last 100 posts
 posts = Post.find(:all, :limit => 100, :order => 'created_at DESC')
@@ -63,27 +63,37 @@ puts "running EM seeded"
 model.em("seeded")
 model.load_vocabulary(vocab_vec)
 #puts model.to_s
-puts "doc prob: #{model.compute_topic_document_probability.inspect}"
-puts "doc phi: #{model.phi.inspect}"
-puts "--------"
-model.print_topics
+#puts "doc prob: #{model.compute_topic_document_probability.inspect}"
+#puts "doc phi: #{model.phi.inspect}"
+#puts "--------"
 topics = model.top_words
+updated_topics = []
 topics.each do|id,words|
-  puts "#{vocab_vec[id]} -> #{words.inspect}"
-  focus = vocab_vec[id]
+  puts "#{words.inspect}"
+  focus = words.first
   topic = Topic.find_or_create_by_focus( :focus => focus, :words => words )
-  #canidates = #Post.find_tagged_with(words, :limit => 100, :order => 'created_at DESC')
   regtags = words.join('|')
-  selected = posts.select{|p|  plain_text = p.plain_text ; plain_text.match(focus) or plain_text.match(regtags) }
-  if selected == posts.empty?
-    topic.destroy
+  selected = posts.select{|p|  plain_text = p.plain_text ; plain_text.match(regtags) }
+  if selected.empty?
+    if topic.posts.empty?
+      topic.destroy
+    end
   else
     #posts -= selected
     posts = posts.reject{|p| selected.find{|i| i.id == p.id} }
-    puts "topics left: #{posts.size}"
     topic.posts = selected
+    puts "Adding #{topic.posts.size}"
+    puts "created topic: #{topic.focus} with Posts, #{topic.posts.map{|p| p.title}.inspect}"
+    topic.save!
+    updated_topics << topic
   end
-  puts "Adding #{topic.posts.size}"
-  puts "created topic: #{topic.focus} with Posts, #{topic.posts.map{|p| p.title}.inspect}"
+  puts "posts left: #{posts.size}"
 end
+puts "posts left: #{posts.size}"
+topic = Topic.find_or_create_by_focus( :focus => 'other')
+topic.posts = posts
+topic.save!
 puts "all topics created"
+
+# now let's scan all the created topics
+# 

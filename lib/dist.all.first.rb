@@ -18,6 +18,7 @@ module Names
     def self.define_set
       @_first_set ||= Set.new [
 :MARY,
+:MISCHA,
 :MILEY,
 :PATRICIA,
 :LINDA,

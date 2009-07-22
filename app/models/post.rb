@@ -44,6 +44,7 @@ class Post < ActiveRecord::Base
     if not limit.nil?
       return plain_text.split(/\s/)[0..limit].join(' ').gsub(/&nbsp;/,' ').gsub(/&amp;/,' and ').gsub(/(\. )+/,' ') #.gsub(/<\/?[^>]*>/, '. ')
     end
+    return body
     # allowed tags: strong, p, a
     allowed = ['body', 'em', 'strong', 'b', 'p', 'a', 'br']
 

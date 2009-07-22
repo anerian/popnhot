@@ -14,6 +14,7 @@ module TagsHelper
     end
 
     taggings = tag.taggings(:order => :created_at).first
+    return "tag1" if taggings.nil?
     range = (Time.now - (0.5).day.ago)
     placement = Time.now - taggings.created_at
     delta = range - placement

@@ -8,6 +8,7 @@ module Crawl
       (body/"style").remove
       (body/"script").remove
       (body/"noscript").remove
+      (body/".blog_gallery").remove
 
       img = (body.at("div.entry_img_left img") || body.at("div.entry_img_top img") || body.at("div.entry_img_right img"))
       if img

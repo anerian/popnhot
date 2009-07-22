@@ -9,6 +9,9 @@ module Crawl
       (body/"script").remove
       (body/"noscript").remove
 
+      (body/".related_text").remove
+      (body/".quigo").remove
+
       thumb_path = (item_content[:image] || item_content[:thumbnail]).first if (item_content[:image] or item_content[:thumbnail])
       {:body => normalize(body.inner_html), :thumb_path => thumb_path }
     end

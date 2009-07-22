@@ -4,6 +4,7 @@ module Crawl
       doc = Hpricot(body)
       body = doc.at('div.story-body')
       body = doc.at('div.story-item') unless body
+      body = doc.at('#storyBody') unless body
       body = (doc/'body') unless body
 
       (body/"style").remove
