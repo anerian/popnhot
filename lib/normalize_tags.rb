@@ -13,6 +13,8 @@ module Normalize
          :about,
          :an,
          :are,
+         :and,
+         :has,
          :as,
          :at,
          :be,
@@ -49,6 +51,10 @@ module Normalize
     def self.prepare_text(text)
       text = ActiveSupport::Multibyte::Chars.new(text).mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n,'').
                                             to_s.gsub(/\r|\n/,' ').gsub(/\s/, ' ').squeeze(' ')
+    end
+
+    def self.prune_stopwords(text)
+      text.split(' ').select{|w| !StopWords.include?(w.to_sym) and !StopWords.include?(w.downcase.to_sym) }.join(' ')
     end
 
     def self.name_taggers

@@ -7,9 +7,14 @@ require 'lda'
 require 'rbtagger'
 require File.join(RAILS_ROOT,'lib','normalize_tags')
 
+def post_text(post)
+  Normalize::Tags.prune_stopwords(post.title) + ' ' + post.tag_list.join(' ') #post.title + ' ' + post.body
+end
+
 class PostDoc < Lda::Document
   def initialize(post, vocab_set, tagger)
-    text = post.tag_list.join(' ') #post.title + ' ' + post.body
+    text = post_text(post)
+    puts "Using text: #{text}"
     term_freq = tagger.freq(text)
     idx = "#{term_freq.size} "
     @post = post
@@ -26,7 +31,7 @@ end
 
 def build_vocab(posts)
   vec = []  #Tag.all.map{|t| t.name }
-  posts.each {|p| vec << p.plain_text.split(' ') }
+  posts.each {|p| vec << post_text(p).split(' ') }
   vec.flatten!
   vec.uniq!
   puts "Vocab size: #{vec.size}"
@@ -35,10 +40,10 @@ def build_vocab(posts)
   [vec, set]
 end
 
-#Topic.destroy_all
+Topic.destroy_all
 
 # find the last 100 posts
-posts = Post.find(:all, :limit => 100, :order => 'created_at DESC')
+posts = Post.find(:all, :limit => 140, :order => 'created_at DESC')
 
 # build the vocabulary from the tags
 vocab_vec, vocab_set = build_vocab(posts)
@@ -73,7 +78,7 @@ topics.each do|id,words|
   focus = words.first
   topic = Topic.find_or_create_by_focus( :focus => focus, :words => words )
   regtags = words.join('|')
-  selected = posts.select{|p|  plain_text = p.plain_text ; plain_text.match(regtags) }
+  selected = posts.select{|p| p.title.match(regtags) }
   if selected.empty?
     if topic.posts.empty?
       topic.destroy
