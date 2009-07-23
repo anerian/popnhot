@@ -5,18 +5,66 @@
   <%= stylesheet_link_tag 'styles' %>
 </head>
 <body>
-  <div id="header">
-    <% if @title.nil? %>
-      <h1 id="logo"><a title="All the celebrity gossip in one place" href="/">Pop'N Hot!</a></h1>
-    <% else %>
-      <h2 id="logo"><a title="All the celebrity gossip in one place" href="/">Pop'N Hot!</a></h2>
-    <% end %>
-  </div>
-  <div id="content">
-    <%= yield %>
-  </div>
-  <div id="sidebar">
-    <%= yield :sidebar %>
-  </div>
+	<div id="container">
+		<div id="header">
+			<a href="/" title="All the celebrity gossip in one place">
+				<h1 id="logo">Pop'n Hot</h1>
+			</a>
+			<div id="u-nav">
+				<ul id="tabs">
+					<% 4.times do |index| %><li><a href="#">nav item <%= index %></a></li><% end %>
+				</ul>
+			</div>
+		</div>
+		<div id="content">
+			<div class="c2_1">
+				<div class="profile article">
+					<div class="article-body">
+						<div class="article-content">
+							<h2>Person's name</h2>
+							<p>this is a profile page</p>
+						</div>
+					</div>
+					<div class="article-meta">
+						<h3>Profile</h3>
+					</div>
+				
+				</div>
+				<% 5.times do %>
+				<div class="article">
+					<div class="article-body">
+						<div class="article-content">
+						<h2>This is the article head</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacus tortor, feugiat sit amet suscipit non, consequat in felis. Suspendisse quis orci nec ante placerat accumsan. Sed auctor tristique velit a lacinia. Sed pharetra purus ac est gravida faucibus. Vivamus aliquam eros non dui varius id venenatis leo iaculis. Donec magna diam, molestie ac scelerisque at, vehicula sit amet urna. Sed eget ante turpis. Suspendisse et lacus vel magna hendrerit accumsan ac ut sapien. Aliquam eget tellus quis purus pulvinar blandit in nec tellus. Sed dictum, velit vitae bibendum pharetra, dui erat laoreet tortor, sed pretium mauris tellus euismod eros. Fusce sagittis libero eget tortor hendrerit ornare.</p>
+						</div>
+					</div>
+					<div class="article-meta">
+						<div class="date">
+							<div class="day">31</div>
+							<div class="month">Jul</div>
+							<div class="year">2009</div>
+							<div class="time">6:32pm</div>
+						</div>
+						<div class="clear"></div>
+						<div class="meta">
+							<ul>
+								<li>First on the scene: tmz</li>
+								<li># of event articles</li>
+								<li>Most recent report: tmz</li>
+							</ul>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+				<% end %>
+			</div>
+			<div class="c2_2 sidebar">
+				asdf
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer"></div>
+	</div>
 </body>
 </html>
