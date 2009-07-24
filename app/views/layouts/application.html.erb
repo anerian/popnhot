@@ -12,55 +12,95 @@
 			</a>
 			<div id="u-nav">
 				<ul id="tabs">
-					<% 4.times do |index| %><li><a href="#">nav item <%= index %></a></li><% end %>
+					<li class="selected"><a href="#">Events</a></li>
+					<li><a href="#">Celebrities</a></li>
+					<li><a href="#">Hottest Events</a></li>
+					<li><a href="#">Hottest Celebrities</a></li>
 				</ul>
 			</div>
 		</div>
 		<div id="content">
 			<div class="c2_1">
 				<div class="profile article">
-					<div class="article-body">
-						<div class="article-content">
-							<h2>Person's name</h2>
-							<p>this is a profile page</p>
+					<div class="article-bg">
+						<div class="article-body">
+							<div class="article-content">
+								<h2>Person's name</h2>
+								<p>this is a profile page</p>
+							</div>
 						</div>
+						<div class="article-meta">
+							<h3>Profile</h3>
+						</div>
+						<div class="clear"></div>
 					</div>
-					<div class="article-meta">
-						<h3>Profile</h3>
-					</div>
-				
 				</div>
 				<% 5.times do %>
 				<div class="article">
-					<div class="article-body">
-						<div class="article-content">
-						<h2>This is the article head</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacus tortor, feugiat sit amet suscipit non, consequat in felis. Suspendisse quis orci nec ante placerat accumsan. Sed auctor tristique velit a lacinia. Sed pharetra purus ac est gravida faucibus. Vivamus aliquam eros non dui varius id venenatis leo iaculis. Donec magna diam, molestie ac scelerisque at, vehicula sit amet urna. Sed eget ante turpis. Suspendisse et lacus vel magna hendrerit accumsan ac ut sapien. Aliquam eget tellus quis purus pulvinar blandit in nec tellus. Sed dictum, velit vitae bibendum pharetra, dui erat laoreet tortor, sed pretium mauris tellus euismod eros. Fusce sagittis libero eget tortor hendrerit ornare.</p>
+					<div class="article-bg">
+						<div class="article-body">
+							<div class="article-content">
+							<h2>This is the article head</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacus tortor, feugiat sit amet suscipit non, consequat in felis. Suspendisse quis orci nec ante placerat accumsan. Sed auctor tristique velit a lacinia. Sed pharetra purus ac est gravida faucibus. Vivamus aliquam eros non dui varius id venenatis leo iaculis. Donec magna diam, molestie ac scelerisque at, vehicula sit amet urna. Sed eget ante turpis. Suspendisse et lacus vel magna hendrerit accumsan ac ut sapien. Aliquam eget tellus quis purus pulvinar blandit in nec tellus. Sed dictum, velit vitae bibendum pharetra, dui erat laoreet tortor, sed pretium mauris tellus euismod eros. Fusce sagittis libero eget tortor hendrerit ornare.</p>
+							</div>
 						</div>
-					</div>
-					<div class="article-meta">
-						<div class="date">
-							<div class="day">31</div>
-							<div class="month">Jul</div>
-							<div class="year">2009</div>
-							<div class="time">6:32pm</div>
+						<div class="article-meta">
+							<div class="date">
+								<div class="day">31</div>
+								<div class="month">Jul</div>
+								<div class="year">2009</div>
+								<div class="time">6:32pm</div>
+							</div>
+							<div class="clear"></div>
+							<div class="meta">
+							
+								<ul>
+									<li>
+										<h5>First on the scene:</h5>
+										<a href="www.tmz.com">www.tmz.com</a>
+									</li>
+									<li><h5>Event Hottness</h5>
+										15
+									</li>
+									<li><h5>Most recent update:</h5>
+										<a href="www.tmz.com">www.usmagazine.com</a>
+									</li>
+									<li>
+										<h5>Featured celebrities</h5>
+										<ul class="celebrity">
+											<% 3.times do %>
+											<li>Audrina patridge</li>
+											<li>Audrina patridge</li>
+											<li>Audrina patridge</li>
+											<%end %>
+										</ul>
+									</li>
+								</ul>
+							</div>
 						</div>
 						<div class="clear"></div>
-						<div class="meta">
-							<ul>
-								<li>First on the scene: tmz</li>
-								<li># of event articles</li>
-								<li>Most recent report: tmz</li>
-							</ul>
-						</div>
 					</div>
-					<div class="clear"></div>
 				</div>
 				<div class="clear"></div>
 				<% end %>
 			</div>
 			<div class="c2_2 sidebar">
-				asdf
+				<div class="menu-block">
+					<h3>Currently hot celebrities</h3>
+					<ul>
+					          <li><a href="/tags/michael-jackson" class="tag3">Michael jackson</a></li>
+					          <li><a href="/tags/jon-gosselin" class="tag3">Jon gosselin</a></li>
+					          <li><a href="/tags/robert-pattinson" class="tag3">Robert pattinson</a></li>
+					          <li><a href="/tags/kristen-stewart" class="tag3">Kristen stewart</a></li>
+					          <li><a href="/tags/taylor-lautner" class="tag3">Taylor lautner</a></li>
+					          <li><a href="/tags/amy-winehouse" class="tag3">Amy winehouse</a></li>
+					          <li><a href="/tags/angelina-jolie" class="tag3">Angelina jolie</a></li>
+					          <li><a href="/tags/katie-holmes" class="tag3">Katie holmes</a></li>
+					          <li><a href="/tags/kate-major" class="tag3">Kate major</a></li>
+					          <li><a href="/tags/britney-spears" class="tag2">Britney spears</a></li>
+					          <li><a href="/tags/dr-conrad-murray" class="tag2">Dr. conrad murray</a></li>
+					 </ul>
+				</div>
 			</div>
 			<div class="clear"></div>
 		</div>

@@ -43,7 +43,7 @@ body {
 /*PARAGRAPHS
 -------------------------------------------------------- */
 p{
-	font-size:1.0em;
+	font-size:.8em;
 	line-height:1.5em;
 	margin-bottom:1.5em;
 }
@@ -88,9 +88,9 @@ h4{
 }
 h5{
 	font-size:1em;
-	margin-bottom:1.8em;
-	line-height:1.8em;
+	line-height:.8em;
 	font-variant:small-caps;
+	margin-bottom:5px;
 }
 h6{
 	font-size:1em;
@@ -249,16 +249,17 @@ body {
 	float:left;
 }
 .article {
-	min-height:200px;
-	
+
 	border-bottom:1px solid #CBCBCB;
+}
+.article-bg {
 	background:transparent url(/images/meta-bg.png) no-repeat bottom left;
 }
 .profile {
 	background:transparent url(/images/profile-bg.png) repeat-y;
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
-	min-height:150px;
+	
 }
 .profile h3 {
 	padding-top:27px;
@@ -277,7 +278,6 @@ body {
 .article-meta {
 	width:130px;
 	float:left;
-	height:30px;
 	
 }
 .article-meta .date {
@@ -313,8 +313,22 @@ body {
 .meta {
 	font-size:10px;
 }
-
-
+.meta ul{
+	padding: 15px;
+}
+.meta li {
+	border-bottom:1px dotted #cbcbcb;
+	padding:5px 0;
+}
+ul.celebrity{
+	padding: 0;
+	
+}
+ul.celebrity li {
+	border:none;
+	padding:0 0 0 5px;
+	
+}
 
 
 
