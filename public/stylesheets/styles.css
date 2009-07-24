@@ -42,6 +42,7 @@ body {
 
 /*PARAGRAPHS
 -------------------------------------------------------- */
+
 p{
 	font-size:.8em;
 	line-height:1.5em;
@@ -194,6 +195,17 @@ img.right-img{ /* Float any image to the RIGHT and give it some margin */
 body {
 	background: #474747 url(/images/bg.png) repeat-x;
 }
+img {
+	padding:3px;
+	margin:5px;
+	background:#cc527a;
+}
+.img-container {
+	border:1px solid #f00;
+	width: 182px;
+	float:left;
+	margin-right:15px;
+}
 #container {
 	width:950px;
 	margin:10px auto;
@@ -330,8 +342,38 @@ ul.celebrity li {
 	
 }
 
-
-
+.sidebar .menu-block{
+	padding:27px 15px 15px 15px;
+	border-bottom:1px solid #CBCBCB;
+	background:transparent url(/images/sidebar-bg.png) no-repeat bottom center;
+}
+.sidebar li {
+	font-size:.8em;
+	line-height:1.5em;
+}
+.sidebar h4{
+	border-bottom:1px solid #cc527a;
+}
+.sidebar .left {
+	float:left;
+	width:138px;
+	padding-right:5px;
+	border-right: 1px dotted #cc527a;
+}
+.sidebar .right {
+	width:138px;
+	padding-left:5px;
+	float:left;
+}
+.sidebar .articles {
+	list-style-type:circle;
+	padding-left:10px;
+}
+.sidebar .articles img {
+	width: 25px;
+	height: 25px;
+	float:left;
+}
 /*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
 */
 /* remember to define focus styles! */
