@@ -14,7 +14,7 @@ class Post < ActiveRecord::Base
 
   # list of tags to exclude
   def self.excluded_tags
-    ["TMZ.com","PEOPLE","says","members","protectors","Read"]
+    ["TMZ.com","Usmagazine.com","PEOPLE","says","members","protectors","Read","Read more"]
   end
 
   def validate
