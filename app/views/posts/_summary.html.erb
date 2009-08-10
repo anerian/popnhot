@@ -10,14 +10,14 @@
 		<% end %>		
 	</div>
 	<p><%= post.summary %></p>
-  <% if topic  and posts %>
+  <% if defined?(topic) and defined?(posts) %>
   <div class="other">
     <% posts.shift %>
     <% posts.each do|p| %>
       <% if p.image.nil? %>
-        <%= image_tag 'default', :width => '85', :height => '85' %>
+        <%= link_to image_tag('default', :width => '85', :height => '85'), p.permalink %>
       <% else %>
-        <%= image_tag p.image, :width => '85', :height => '85' %>
+        <%= link_to image_tag(p.image, :width => '85', :height => '85'), p.permalink %>
       <% end %>		
     <% end %>
   </div>
@@ -36,7 +36,7 @@
 	<div class="clear"></div>
 	<div class="meta">
 		<ul>
-      <% if topic  and posts %>
+      <% if defined?(topic) and defined?(posts) %>
 			<li>
 				<h5>First on the scene:</h5>
 				<%= link_to posts.first.feed.title, posts.first.feed.link %>

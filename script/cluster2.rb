@@ -49,8 +49,8 @@ corpus.vocabulary.words.each do|word,id|
   idvwi[id] = word
 end
 lda = Lda::Lda.new(corpus)
-lda.em("random")
-topics = lda.top_words(10)
+lda.em("seeded")
+topics = lda.top_words(5)
 Topic.destroy_all
 topics.each do|t,words|
   words.map!{|wid| idvwi[wid] }
