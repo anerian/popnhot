@@ -106,14 +106,15 @@ p a{
 p a:hover{
 	text-decoration:none;
 }
-h1 a{
-	color:#000;
-}
-h1 a:hover{
+h1 a, h2 a{
+	color:#535353;
 	text-decoration:none;
 }
+h1 a:hover, h1 a:hover {
+	text-decoration:underline;
+}
 li a{
-	color:#000;
+	color:#535353;
 }
 li a:hover{
 	text-decoration:none;
@@ -226,7 +227,7 @@ img {
 }
 #tabs{
 	
-	height:50px;
+	height:93px;
 }
 #tabs li {
 	float:left;
@@ -234,21 +235,43 @@ img {
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
-	background: transparent url(/images/tab-bg.png) repeat-x;
-}
-#tabs li a {
-	height:50px;
-	display:block;
+	margin-right:2px;
+	padding-left:5px;
+	background: transparent url(/images/tab-left-bg.png) no-repeat left 58px;
 	
 }
+#tabs li a {
+	color:#fff;
+	text-decoration:none;
+	font-weight:bold;
+}
+
+#tabs li.selected {
+	background: transparent url(/images/tab-left-bg.png) no-repeat left -35px;
+}
+#tabs li.selected div  {
+	color:#535353;
+}
+#tabs li a {
+	height:23px;
+	display:block;
+	padding:70px 15px 0 10px;
+	
+	background: transparent url(/images/tab-bg.png) no-repeat right 58px;
+}
+#tabs li.selected div {
+	height:23px;
+	display:block;
+	padding:70px 15px 0 10px;
+	background: transparent url(/images/tab-bg.png) no-repeat right -35px;
+}
 #content {
-	background-color: #ccc;
 	-moz-border-radius-topright: 5px;
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	min-height:250px;
-	background:#0f0 url(/images/content_bg.png) repeat-y;
+	background:#ccc url(/images/content_bg.png) repeat-y;
 }
 
 
@@ -259,16 +282,22 @@ img {
 .c2_2 {
 	width: 318px;
 	float:left;
+	padding-left:2px;
 }
 .article {
-
 	border-bottom:1px solid #CBCBCB;
+	background:#f00;
+	background:transparent url(/images/meta-bg.png) repeat-y scroll 0 0;
+}
+.article.first {
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
 }
 .article-bg {
-	background:transparent url(/images/meta-bg.png) no-repeat bottom left;
+	background:transparent url(/images/flame-bg.png) no-repeat bottom left;
 }
 .profile {
-	background:transparent url(/images/profile-bg.png) repeat-y;
+	background:transparent url(/images/profile-bg.png) repeat-y scroll 0 0;;
 	-moz-border-radius-topleft: 5px;
 	-webkit-border-top-left-radius: 5px;
 	
@@ -293,8 +322,9 @@ img {
 	
 }
 .article-meta .date {
-	padding-left:15px;
 	padding-top:30px;
+	width:120px;
+	float:right;
 }
 .article-meta .day {
 	font-size:40px;
@@ -347,6 +377,8 @@ ul.celebrity li {
 	border-bottom:1px solid #CBCBCB;
 	background:transparent url(/images/sidebar-bg.png) no-repeat bottom center;
 }
+
+
 .sidebar li {
 	font-size:.8em;
 	line-height:1.5em;
@@ -374,6 +406,67 @@ ul.celebrity li {
 	height: 25px;
 	float:left;
 }
+.sidebar .celebrities li {
+	height:30px;
+	position:relative;
+}
+.sidebar .celebrities li a {
+	padding-left:45px;
+	display:block;
+	text-align:bottom;
+}
+.sidebar .hotness {
+	padding-left:10px;
+	background:transparent url(/images/flames.png) no-repeat;
+	position:absolute;
+	height:30px;
+	width:30px;
+	top:-13px;
+}
+.sidebar .hotness div {
+	display:block;
+	position:absolute;
+	top:15px;
+	left:21px;
+}
+.sidebar .tag2{
+	background-position: 0 -30px;
+}
+.sidebar .tag3{
+	background-position: 0 -60px;
+}
+.sidebar .tag4{
+	background-position: 0 -90px;
+}
+.sidebar .tag5{
+	background-position: 0 -120px;
+}
+
+#footer {
+	border: 1px solid #ccc;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	background:#fff url(/images/footer-bg.png);
+	color:#333;
+}
+#footer .container {
+	padding:40px;
+	background: transparent url(/images/shadow-top.png) repeat-x top;
+	border-top:1px solid #fff;
+}
+#single {
+	padding:10px;
+}
+
+/*pagination*/
+.pagination, .pagination a, .pagination span {
+	height:60px;
+	line-height:60px;
+	border-right:1px solid #333;
+}
+
 /*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
 */
 /* remember to define focus styles! */

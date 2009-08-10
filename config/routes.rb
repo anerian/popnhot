@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.tags '/tags', :controller => 'tags', :action => 'index'
   map.tag '/t/:permalink', :controller => 'tags', :action => 'show'
   map.posts '/', :controller => 'posts', :action => 'index'
+  map.posts '/posts', :controller => 'posts', :action => 'index'
   map.post '/:permalink', :controller => 'posts', :action => 'show'
   map.post '/posts/:permalink', :controller => 'posts', :action => 'show'
   map.root :controller => 'posts', :action => 'index'

@@ -1,14 +1,45 @@
-<p>
 <% post.summarize! %>
-<% if post.image.nil? %>
-  <%= image_tag 'default', :width => '125', :height => '125' %>
-<% else %>
-  <%= image_tag post.image, :width => '125', :height => '125' %>
-<% end %>
-<strong><%= link_to post.title, post.permalink %></strong><br/>
-<%= post.summary %>
-</p>
-<%= h post.feed.title %>
-<% for t in post.tags do %>
-<%= link_to t.name, tag_path(t) %>&nbsp;
-<% end %>
+<div class="article-body">
+	<div class="article-content">
+	<h2><%= link_to post.title, post.permalink %></h2>
+	<div class="img-container">
+		<% if post.image.nil? %>
+		  <%= image_tag 'default', :width => '125', :height => '125' %>
+		<% else %>
+		  <%= image_tag post.image, :width => '125', :height => '125' %>
+		<% end %>		
+	</div>
+	<p><%= post.summary %></p>
+	<div class="clear"></div>
+	</div>
+</div>
+<div class="article-meta">
+	<div class="date">
+		<% d = post.created_at %>
+		<div class="day"><%= d.day %></div>
+		<div class="month"><%= d.strftime('%b') %></div>
+		<div class="year"><%= d.year %></div>
+		<div class="time"><%= d.strftime("%I:%M%p") %></div>
+	</div>
+	<div class="clear"></div>
+	<div class="meta">
+		<ul>
+			<li>
+				<h5>First on the scene:</h5>
+				<%= link_to post.feed.title, post.feed.link %>
+			</li>
+			<li><h5>Event Hottness</h5>
+				15
+			</li>
+			<li>
+				<h5>Featured celebrities</h5>
+				<ul class="celebrity">
+					<% for t in post.tags do %>
+					<li><%= link_to t.name, tag_path(t) %></li>
+					<% end %>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="clear"></div>

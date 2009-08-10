@@ -1,2 +1,9 @@
-<h1>Tags#index</h1>
-<p>Find me in app/views/tags/index.html.erb</p>
+<h1>Celebrity Directory</h1>
+<p>Here's a list of all the celebrities PopNHot is currently following.</p>
+<ul>
+	
+		<% @tags.each do |t| %>
+			<li><%= t.name %> <%= t.count %></li>
+		<% end %>
+	
+</ul>
