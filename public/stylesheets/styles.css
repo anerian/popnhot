@@ -77,7 +77,6 @@ h2{
 }
 h3{
 	font-size:1.5em;
-	margin-bottom:1.2em;
 	line-height:1.2em;
 	font-variant:small-caps;
 }
@@ -202,8 +201,7 @@ img {
 	background:#cc527a;
 }
 .img-container {
-	border:1px solid #f00;
-	width: 182px;
+	border:1px solid #CC527A;
 	float:left;
 	margin-right:15px;
 }
@@ -239,6 +237,11 @@ img {
 	padding-left:5px;
 	background: transparent url(/images/tab-left-bg.png) no-repeat left 58px;
 	
+}
+.box {
+	border-top: 1px dotted #CBCBCB;
+	background: transparent url(/images/box-bg.png) no-repeat top center;
+	text-align: center;
 }
 #tabs li a {
 	color:#fff;
