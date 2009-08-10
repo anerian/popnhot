@@ -49,7 +49,7 @@
 				<h5>Featured celebrities</h5>
 				<ul class="celebrity">
 					<% for t in post.tags do %>
-					<li><%= link_to t.name, tag_path(t) %></li>
+					<li><%= link_to t.name, tag_path(t.permalink) %></li>
 					<% end %>
 				</ul>
 			</li>

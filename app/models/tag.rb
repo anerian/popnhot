@@ -21,6 +21,14 @@ class Tag < ActiveRecord::Base
   def to_s
     name
   end
+  
+  def last_name 
+    self.name.split(" ").last
+  end
+  
+  def first_name
+    self.name.split(" ").first
+  end
 
   def count
     read_attribute(:count).to_i
