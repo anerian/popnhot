@@ -7,7 +7,12 @@ class Post < ActiveRecord::Base
     indexes :body
     indexes :author
     indexes :summary
+    has :created_at
   end
+
+  sphinx_scope(:latest_first) {
+    {:order => 'created_at DESC, @relevance DESC'}
+  }
 
   has_permalink :title
 
@@ -168,6 +173,15 @@ class Post < ActiveRecord::Base
     else
       return "on #{system_date.to_formatted_s(date_format)}"
     end
+  end
+
+  # soft attribute not included in the db
+  def weight=(weight)
+    @weight = weight
+  end
+
+  def weight
+    @weight
   end
 
 =begin

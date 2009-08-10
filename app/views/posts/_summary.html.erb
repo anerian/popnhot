@@ -39,10 +39,10 @@
       <% if defined?(topic) and defined?(posts) %>
 			<li>
 				<h5>First on the scene:</h5>
-				<%= link_to posts.first.feed.title, posts.first.feed.link %>
+				<%= link_to post.feed.title, post.feed.link %>
 			</li>
 			<li><h5>Event Hottness</h5>
-				<%= posts.total_entries %>
+				<%= total_entries %>
 			</li>
       <% end %>
 			<li>
