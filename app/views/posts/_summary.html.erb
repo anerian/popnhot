@@ -10,6 +10,18 @@
 		<% end %>		
 	</div>
 	<p><%= post.summary %></p>
+  <% if topic  and posts %>
+  <div class="other">
+    <% posts.shift %>
+    <% posts.each do|p| %>
+      <% if p.image.nil? %>
+        <%= image_tag 'default', :width => '85', :height => '85' %>
+      <% else %>
+        <%= image_tag p.image, :width => '85', :height => '85' %>
+      <% end %>		
+    <% end %>
+  </div>
+  <% end %>
 	<div class="clear"></div>
 	</div>
 </div>
@@ -24,13 +36,15 @@
 	<div class="clear"></div>
 	<div class="meta">
 		<ul>
+      <% if topic  and posts %>
 			<li>
 				<h5>First on the scene:</h5>
-				<%= link_to post.feed.title, post.feed.link %>
+				<%= link_to posts.first.feed.title, posts.first.feed.link %>
 			</li>
 			<li><h5>Event Hottness</h5>
-				15
+				<%= posts.total_entries %>
 			</li>
+      <% end %>
 			<li>
 				<h5>Featured celebrities</h5>
 				<ul class="celebrity">

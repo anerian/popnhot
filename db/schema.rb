@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20090722135310) do
     t.datetime "published_at"
     t.string   "link",            :limit => 1024, :default => "",    :null => false
     t.string   "permalink",                       :default => "",    :null => false
-    t.text     "summary",         :limit => 1024, :default => "",    :null => false
+    t.text     "summary",                                            :null => false
     t.string   "cached_tag_list", :limit => 512
     t.boolean  "ready",                           :default => false, :null => false
   end

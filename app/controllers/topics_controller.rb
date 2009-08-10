@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 80)
+    @topics = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 10)
   end
 
   def show

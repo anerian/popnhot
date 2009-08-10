@@ -2,6 +2,13 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :feed
 
+  define_index do
+    indexes :title
+    indexes :body
+    indexes :author
+    indexes :summary
+  end
+
   has_permalink :title
 
   #validates_uniqueness_of   :body
@@ -163,6 +170,7 @@ class Post < ActiveRecord::Base
     end
   end
 
+=begin
   def self.search(query, page = 1, options = {})
     page = page.to_i > 0 ? page.to_i : 1
 
@@ -200,6 +208,7 @@ class Post < ActiveRecord::Base
       pager.replace records
     end
   end
+=end
 
 private
   def distance_of_time_in_words(minutes)

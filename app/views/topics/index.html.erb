@@ -1,10 +1,12 @@
-<ul class="topics">
-  <% for topic in @topics do %>
-  <li>
-    <strong><%= topic.focus %>(<%= topic.posts.count %>)</strong>
-    <% for post in topic.posts do %>
-      <dd><%= render :partial => 'posts/summary', :locals => {:post => post} %></dd>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
+<% @topics.each_with_index do |topic, i| %>
+<div class="article<%= (i==0) ? " first" : "" %>">
+	<div class="article-bg">
+    <% posts = Post.search(topic.query, :match_mode => :any, :per_page => 5) %>
+    <%= render :partial => 'posts/summary', :locals => {:post => posts.first, :topic => topic, :posts => posts } %>
+  </div>
+</div>
+<div class="clear"></div>
+<% end %>
+<div class="paginate">
+	<%= will_paginate %>
+</div>
