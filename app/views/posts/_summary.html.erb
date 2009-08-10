@@ -11,7 +11,9 @@
 	</div>
 	<p><%= post.summary %></p>
   <% if defined?(topic) and defined?(posts) %>
-  <div class="other">
+	<div class="clear"></div>
+	<h3>Other images</h3>
+  <div class="other box">
     <% posts.shift %>
     <% posts.each do|p| %>
       <% if p.image.nil? %>
