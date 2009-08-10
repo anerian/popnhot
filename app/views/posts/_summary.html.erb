@@ -41,7 +41,7 @@
       <% if defined?(topic) and defined?(posts) %>
 			<li>
 				<h5>Most recent update:</h5>
-				<%= link_to posts.last.feed.title, posts.last.feed.link %>
+				<%= link_to post.feed.title, post.feed.link %>
 			</li>
 			<li>
 				<h5>First on the scene:</h5>
