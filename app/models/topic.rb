@@ -1,4 +1,3 @@
 class Topic < ActiveRecord::Base
-  serialize :words
-  has_and_belongs_to_many :posts
+  named_scope :created_after, lambda {|date| {:conditions => ["created_on > ?", date]} }
 end
