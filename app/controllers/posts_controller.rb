@@ -5,7 +5,6 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_permalink(params[:permalink])
-    #@title = @post.title
   end
 
 end

@@ -5,6 +5,7 @@ class TagsController < ApplicationController
   end
 
   def show
+    @tag = Tag.find_by_permalink(params[:permalink])
   end
 
 end
