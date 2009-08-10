@@ -1,7 +1,6 @@
 class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :feed
-  has_and_belongs_to_many :topics
 
   has_permalink :title
 

@@ -92,13 +92,6 @@ ActiveRecord::Schema.define(:version => 20090722135310) do
   add_index "posts", ["feed_id"], :name => "index_posts_on_feed_id"
   add_index "posts", ["permalink"], :name => "index_posts_on_permalink"
 
-  create_table "posts_topics", :id => false, :force => true do |t|
-    t.integer "post_id",  :null => false
-    t.integer "topic_id", :null => false
-  end
-
-  add_index "posts_topics", ["topic_id", "post_id"], :name => "index_posts_topics_on_topic_id_and_post_id"
-
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -123,8 +116,7 @@ ActiveRecord::Schema.define(:version => 20090722135310) do
   add_index "tags", ["user_id"], :name => "fk_labels_user_id_to_users_id"
 
   create_table "topics", :force => true do |t|
-    t.string   "focus"
-    t.string   "words"
+    t.string   "query"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
