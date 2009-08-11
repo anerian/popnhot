@@ -60,7 +60,7 @@ corpus.vocabulary.words.each do|word,id|
   idvwi[id] = word
 end
 lda = Lda::Lda.new(corpus)
-lda.num_topics = (posts.size * 0.8).to_i
+lda.num_topics = (posts.size * 0.4).to_i
 lda.em("random")
 topics = lda.top_words(4)
 Topic.destroy_all

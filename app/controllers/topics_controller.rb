@@ -1,14 +1,14 @@
 class TopicsController < ApplicationController
   def index
-    #@topics = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 10)
-#=begin
+    @topics = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 10)
+=begin
     @topic_records = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 10)
     topics = []
     # reduce posts so that we don't have duplicates associated to multiple topics
     posts_in_use = {}
     @topic_records.each_with_index do|trec,i|
       # pull back posts ordered by time look at the top 5 matching
-      posts = Post.latest_first.search(trec.query, :match_mode => :extended, :per_page => 5)
+      posts = Post.latest_first.search(trec.query, :match_mode => :any, :per_page => 5)
       use_posts = []
       posts.each_with_weighting do|post, weight|
         if posts_in_use[post.id]
@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
       end
     end
     @topics = topics.reject{|t| t[:posts].empty? }
-#=end
+=end
   end
 
   def show

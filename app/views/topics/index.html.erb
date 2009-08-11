@@ -1,12 +1,12 @@
 <% @topics.each_with_index do |topic, i| %>
 <div class="article<%= (i==0) ? " first" : "" %>">
 	<div class="article-bg">
-    <%= render :partial => 'posts/summary', :locals => {:post => topic[:posts].first,
+    <%#= render :partial => 'posts/summary', :locals => {:post => topic[:posts].first,
                                                         :topic => topic[:topic],
                                                         :posts => topic[:posts],
                                                         :total_entries => topic[:total_entries] } %>
-    <%# posts = Post.latest_first.search(topic.query, :match_mode => :any, :per_page => 5) %>
-    <%#= render :partial => 'posts/summary', :locals => {:post => posts.first,
+    <% posts = Post.latest_first.search(topic.query, :match_mode => :any, :per_page => 5) %>
+    <%= render :partial => 'posts/summary', :locals => {:post => posts.first,
                                                         :topic => topic,
                                                         :posts => posts,
                                                         :total_entries => posts.total_entries} %>
@@ -15,6 +15,6 @@
 <div class="clear"></div>
 <% end %>
 <div class="paginate">
-	<%= will_paginate @topic_records %>
-	<%#= will_paginate @topics %>
+	<%#= will_paginate @topic_records %>
+	<%= will_paginate @topics %>
 </div>
