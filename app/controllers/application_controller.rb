@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def require_meta
     @hot_celebs = Tag.counts(:order => "count desc", :limit=>11, :start_at => 3.weeks.ago)
     @all_time_celebs = Tag.counts(:order=>"count desc", :limit=>11)
-    @hot_topics 
+    @hot_topics = Topic.paginate(:all, :page => params[:page], :order => 'updated_at DESC', :per_page => 10)
     @all_time_topics
   end
   

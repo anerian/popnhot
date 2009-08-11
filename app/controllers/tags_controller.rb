@@ -6,6 +6,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find_by_permalink(params[:permalink])
+    @posts = Post.search(@tag.name, :limit => 5)
   end
 
 end

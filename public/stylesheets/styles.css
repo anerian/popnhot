@@ -66,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 	color:#535353;
 }
 h1{
-	font-size:3em;
+	font-size:2em;
 	margin-bottom:0.6em;
 	line-height:1.2em;
 }
@@ -241,7 +241,10 @@ img {
 .box {
 	border-top: 1px dotted #CBCBCB;
 	background: transparent url(/images/box-bg.png) no-repeat top center;
-	text-align: center;
+	padding:10px;
+}
+.box ul li {
+	margin-bottom:10px;
 }
 #tabs li a {
 	color:#fff;

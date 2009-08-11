@@ -3,4 +3,8 @@ class Topic < ActiveRecord::Base
   def count
     Post.search(self.query, :match_mode => :any).length
   end
+  
+  class << self
+    
+  end
 end

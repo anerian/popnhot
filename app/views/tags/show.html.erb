@@ -1,8 +1,15 @@
 <div class="article first">
 	<div class="article-body">
 		<div class="article-content">
-		<h2><%= @tag.name %></h2>
-		<p><%= @tag.last_name %></p>
+		<h1><%= @tag.name %></h1>
+		<h3>Recent news topics</h3>
+		<div class="box">
+			<ul>
+					<% @posts.each do |p| %>
+					<li><%= link_to p.title, p.permalink %></li>
+					<% end %>
+			</ul>
+		</div>
 		<div class="clear"></div>
 		</div>
 	</div>
@@ -21,9 +28,9 @@
 					<h5>First hot event:</h5>
 					10.1.2008
 				</li>
-			
 			</ul>
 		</div>
 	</div>
 	<div class="clear"></div>
 </div>
+
